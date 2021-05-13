@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UIThreadDemo</string>
+    <string name="app_name">Media poc</string>
     <string name="string_startthread">Start Thread</string>
     <string name="string_stopthread">Stop thread</string>
     <string name="string_startservice">Start Service</string>
