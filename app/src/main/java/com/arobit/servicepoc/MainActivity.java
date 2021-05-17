@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.IBinder;
 
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -38,11 +41,19 @@ public class MainActivity extends AppCompatActivity {
         mPlayer = new MediaPlayer();
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         song = new ArrayList<>();
-        song.add("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
-        song.add("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3");
-        song.add("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3");
-        song.add("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3");
-        song.add("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3");
+
+        File direct = new File(Environment.getExternalStorageDirectory().toString() + "/BigAudioBook");
+        if (direct.exists()) {
+            Toast.makeText(this, Uri.fromFile(new File(direct+"/SoundHelix-Song-1.mp3"))+"", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "False", Toast.LENGTH_LONG).show();
+        }
+
+        song.add(Uri.fromFile(new File(direct+"/SoundHelix-Song-1"))+"");
+        song.add(Uri.fromFile(new File(direct+"/SoundHelix-Song-2"))+"");
+        song.add(Uri.fromFile(new File(direct+"/SoundHelix-Song-3"))+"");
+        song.add(Uri.fromFile(new File(direct+"/SoundHelix-Song-4"))+"");
+
 
 
         setMedia(song.get(songCount[0]));
